@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, Image, TouchableOpacity, StyleSheet, Alert } from 'react-native';
+import { View, Text, Image, TouchableOpacity, StyleSheet, Alert,ScrollView } from 'react-native';
 
 function TelaDetalhesProduto({ route, navigation }) {
   const { produtoSelecionado, origemNavegacao } = route.params;
@@ -10,9 +10,7 @@ function TelaDetalhesProduto({ route, navigation }) {
       'Sucesso! 🎉',
       `${quantidade} ${produtoSelecionado.nome} adicionado(s) ao carrinho!`,
       [
-        { text: 'Continuar Comprando', onPress: () => navigation.goBack() },
-        { text: 'Ver Carrinho', onPress: () => console.log('Ir para carrinho') },
-      ]
+        { text: 'Continuar Comprando', onPress: () => navigation.goBack() },      ]
     );
   };
 
@@ -24,7 +22,7 @@ function TelaDetalhesProduto({ route, navigation }) {
   };
 
   return (
-    <View style={estilos.container}>
+    <ScrollView style={estilos.container}>
       {/* Botão voltar */}
       <TouchableOpacity
         style={estilos.botaoVoltar}
@@ -96,7 +94,7 @@ function TelaDetalhesProduto({ route, navigation }) {
           <Text style={estilos.textoBotaoComprar}>🛒 Adicionar ao carrinho</Text>
         </TouchableOpacity>
       </View>
-    </View>
+    </ScrollView>
   );
 }
 
@@ -116,8 +114,8 @@ const estilos = StyleSheet.create({
   },
   imagemGrande: {
     width: '100%',
-    height: 220,
-    resizeMode: 'contain',
+    height: 400,
+    resizeMode: 'auto',
     backgroundColor: '#FFF',
   },
   detalhesContainer: {
