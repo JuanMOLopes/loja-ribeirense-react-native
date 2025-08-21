@@ -93,12 +93,12 @@ function TelaLogin({ navigation }) { // para navegação entre telas
       <Text style={estilos.dicaLogin}>
         💡 Dica: use aluno | 123
       </Text>
-
-      <Modal
-        transparent
-        animationType="fade"
-        visible={!!mensagemModal}
-      >
+<Modal
+  transparent                    
+  animationType="fade"            //  efeito de fade (opacidade)
+  visible={!!mensagemModal}       // Modal só aparece se mensagemModal não estiver vazio
+>
+  
         <View style={estilos.modalContainer}>
           <View style={estilos.modalBox}>
             <Text style={estilos.modalTexto}>{mensagemModal}</Text>
