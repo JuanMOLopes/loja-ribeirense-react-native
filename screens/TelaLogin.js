@@ -28,8 +28,8 @@ function TelaLogin({ navigation }) {
   const [usuario, setUsuario] = useState('');
   const [senha, setSenha] = useState('');
   const [mensagemModal, setMensagemModal] = useState('');
-  const [loginConcluido, setLoginConcluido] = useState(false);
-  const [loading, setLoading] = useState(false); // Estado para o ActivityIndicator
+  const [loginConcluido, setLoginConcluido] = useState(false); // mostra se o login foi feito com sucesso e influencia se o botão "fechar" vai aparecer ou não
+  const [loading, setLoading] = useState(false); // mostra se o spinner aparece ou não, indicando o carregamento somnete se o login for concluido
 
 
   // Rotação da tela
