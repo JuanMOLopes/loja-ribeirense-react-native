@@ -1,18 +1,3 @@
-<<<<<<< HEAD
-import React, { useState } from 'react';
-import {
-  View,            
-  Text,            
-  TextInput, // Campo de entrada de texto
-  TouchableOpacity, // respondam a toques -> animação que reduz a opacidade
-  StyleSheet,
-  Modal, // Componente para exibir janelas modais
-  ActivityIndicator 
-} from 'react-native';
-
-function TelaLogin({ navigation }) { // para navegação entre telas
-
-=======
 import React, { useState, useEffect } from 'react';
 import {
   View,
@@ -21,18 +6,16 @@ import {
   TouchableOpacity,
   StyleSheet,
   Modal,
-  Dimensions
+  Dimensions,
+  ActivityIndicator
 } from 'react-native';
 
 function TelaLogin({ navigation }) {
->>>>>>> 85e1ddbbea27da8198327c39110181fcb7fa7d32
   const [usuario, setUsuario] = useState('');
   const [senha, setSenha] = useState('');
   const [mensagemModal, setMensagemModal] = useState('');
   const [loginConcluido, setLoginConcluido] = useState(false);
-<<<<<<< HEAD
-  const [loading, setLoading] = useState(false); // Estado para o ActivityIndicator
-=======
+  const [loading, setLoading] = useState(false);
 
   // Rotação da tela
   const [tela, setTela] = useState(Dimensions.get('window'));
@@ -44,16 +27,11 @@ function TelaLogin({ navigation }) {
   }, []);
 
   const paisagem = tela.width > tela.height;
->>>>>>> 85e1ddbbea27da8198327c39110181fcb7fa7d32
 
   const usuarioValido = [
     { usuario: 'aluno', senha: '123' }
   ];
 
-<<<<<<< HEAD
- // Função que vai validar o login , se os campos não forem preenchidos, vai aparecer a mensagem definida
-=======
->>>>>>> 85e1ddbbea27da8198327c39110181fcb7fa7d32
   const realizarLogin = () => {
     if (!usuario || !senha) {
       setMensagemModal('⚠️ Preencha usuário e senha');
@@ -64,47 +42,21 @@ function TelaLogin({ navigation }) {
       user => user.usuario === usuario && user.senha === senha
     );
 
-<<<<<<< HEAD
-
-  // Se encontrou o usuário válido
-    if (usuarioEncontrado) {
-  // Monta um objeto com dados que podem ser enviados para a próxima tela
-
-      const dadosParaEnviar = {
-        usuario: {
-          ...usuarioEncontrado, // copia os dados do usuário
-          senha: undefined // remove a senha por segurança
-        },
-      };
-
- // Define a mensagem de sucesso no modal
-=======
     if (usuarioEncontrado) {
       const dadosParaEnviar = {
         usuario: { ...usuarioEncontrado, senha: undefined }
       };
 
->>>>>>> 85e1ddbbea27da8198327c39110181fcb7fa7d32
       setMensagemModal('✅ Login concluído');
       setLoginConcluido(true);
-      setLoading(true); //  Mostra o ActivityIndicator
+      setLoading(true);
 
-<<<<<<< HEAD
- // Aguarda 2 segundos e navega para a tela de lista de produtos
       setTimeout(() => {
         setMensagemModal('');
-        setLoading(false); 
+        setLoading(false);
         navigation.navigate('TelaListaProdutos', dadosParaEnviar);
       }, 2000);
     } else {
-         // Se não encontrou o usuário, mostra mensagem de erro
-=======
-      setTimeout(() => {
-        setMensagemModal('');
-        navigation.navigate('TelaListaProdutos', dadosParaEnviar);
-      }, 2000);
-    } else {
->>>>>>> 85e1ddbbea27da8198327c39110181fcb7fa7d32
       setMensagemModal('❌ Usuário ou senha incorretos');
     }
   };
@@ -119,7 +71,6 @@ function TelaLogin({ navigation }) {
         placeholder="usuário"
         value={usuario}
         onChangeText={setUsuario}
-        keyboardType="default"
       />
 
       <TextInput
@@ -134,32 +85,17 @@ function TelaLogin({ navigation }) {
         <Text style={estilos.textoBotaoLogin}>👉 Entrar</Text>
       </TouchableOpacity>
 
-<<<<<<< HEAD
-      <Text style={estilos.dicaLogin}>
-        💡 Dica: use aluno | 123
-      </Text>
-
-      <Modal
-        transparent 
-=======
       <Text style={estilos.dicaLogin}>💡 Dica: use aluno | 123</Text>
 
-      {/* Modal que mostra mensagens */}
-      <Modal
-        transparent
->>>>>>> 85e1ddbbea27da8198327c39110181fcb7fa7d32
-        animationType="fade"
-        visible={!!mensagemModal}
-      >
+      <Modal transparent animationType="fade" visible={!!mensagemModal}>
         <View style={estilos.modalContainer}>
           <View style={estilos.modalBox}>
             <Text style={estilos.modalTexto}>{mensagemModal}</Text>
-<<<<<<< HEAD
 
-            {loading && <ActivityIndicator size="large" color="#4CAF50" style={{ marginTop: 10 }} />} {/* <-- Loader */}
+            {loading && (
+              <ActivityIndicator size="large" color="#4CAF50" style={{ marginTop: 10 }} />
+            )}
 
-=======
->>>>>>> 85e1ddbbea27da8198327c39110181fcb7fa7d32
             {!loginConcluido && (
               <TouchableOpacity
                 style={estilos.modalBotao}
@@ -172,7 +108,7 @@ function TelaLogin({ navigation }) {
         </View>
       </Modal>
 
-      {/* Feedback de rotação sempre visível */}
+      {/* Feedback de rotação */}
       <View style={[estilos.containerRotacao, { backgroundColor: paisagem ? '#4CAF50' : '#1976D2' }]}>
         <Text style={estilos.textoRotacao}>
           {paisagem ? 'Modo de paisagem detectado 😀' : 'Modo retrato 🙃'}
@@ -264,7 +200,7 @@ const estilos = StyleSheet.create({
     textShadowColor: 'rgba(0, 0, 0, 0.5)',
     textShadowOffset: { width: 2, height: 2 },
     textShadowRadius: 4
-  },
+  }
 });
 
 export default TelaLogin;
