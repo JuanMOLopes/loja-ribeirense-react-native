@@ -10,7 +10,7 @@ import {
 
 function TelaListaProdutos({ navigation }) {
   const produtos = [
-    {
+   {
       id: 1,
       nome: 'Camisa Azul',
       preco: 149.99,
@@ -109,13 +109,23 @@ function TelaListaProdutos({ navigation }) {
     },
     {
       id: 10,
-      nome: 'Calção eSports',
-      preco: 89.99,
-      imagem: '',
+      nome: 'Meião Branco',
+      preco: 64.99,
+      imagem: 'https://imgnike-a.akamaihd.net/360x360/01730551.jpg',
       descricao:
-        'Calção do uniforme eSports do Ribeirense, design estilizado e leve.',
-      estoque: 22,
-      categoria: 'Calção',
+        'Conforto antissuor, caimento confortável e durabilidade para o jogo.',
+      estoque: 25,
+      categoria: 'Meião',
+    },
+    {
+      id: 11,
+      nome: 'Meião Azul',
+      preco: 64.99,
+      imagem: 'https://imgnike-a.akamaihd.net/360x360/01730515.jpg',
+      descricao:
+        'Conforto antissuor, caimento confortável e durabilidade para o jogo.',
+      estoque: 18,
+      categoria: 'Meião',
     },
   ];
 
