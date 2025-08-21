@@ -1,3 +1,4 @@
+import React, { useState, useEffect } from 'react';
 import {
   View,
   Text,
@@ -6,126 +7,57 @@ import {
   Image,
   StyleSheet,
   SafeAreaView,
+  Dimensions,
+  ScrollView,
 } from 'react-native';
 
-// Import das imagens
-import CamisaAzul from '../assets/CamisaAzul.png';
-import CamisaBranca from '../assets/CamisaBranca.png';
-import CamisaPreta from '../assets/CamisaPreta.png';
-import CamisaRoxa from '../assets/CamisaRoxa.png';
-import CamisaEsports from '../assets/CamisaeSports.png';
-import CalcaoAzul from '../assets/CalcaoAzul.png';
-import CalcaoBranco from '../assets/CalcaoBranco.png';
-import CalcaoPreto from '../assets/CalcaoPreto.png';
-import CalcaoRoxo from '../assets/CalcaoRoxo.png';
-import CalcaoEsports from '../assets/CalcaoeSports.png';
 
 function TelaListaProdutos({ navigation }) {
+  // guarda as dimensões atuais da tela
+  const [tela, setTela] = useState(Dimensions.get('window'));
+
+  // hook para atualizar dimensões quando girar a tela
+  useEffect(() => {
+    const callback = ({ window }) => setTela(window);
+    const subscription = Dimensions.addEventListener('change', callback);
+    return () => subscription?.remove(); // remove listener quando desmontar
+  }, []);
+
+  // verifica se a tela está em modo paisagem
+  const paisagem = tela.width > tela.height;
+
+  // lista de produtos disponíveis
   const produtos = [
     {
       id: 1,
       nome: 'Camisa Azul',
       preco: 149.99,
-      imagem: 'https://lh6.googleusercontent.com/wLPViIiYWtdaPtwIou8_y1FPLMJGKw_EWBYdvZnw1Vn-Ed1ofSyxzPVjzXbBIVNttPxTJLLNtOJ-SnRkFdCZ7AFCF485eKmzMr9O5bF6VEfOQPZbrD9Rsz1psJi7ReaxW24E8At1kZTs4VktyO51UpdANe7koGzOKa2lDoLP020Be6J1SoY9HQ=w1280',
-      descricao:
-        'Camisa oficial azul do Ribeirense, modelo 2025. Tecido leve e respirável.',
+      imagem: 'https://.../camisaazul.png',
+      descricao: 'Camisa oficial azul do Ribeirense...',
       estoque: 15,
       categoria: 'Camisa',
     },
-    {
-      id: 2,
-      nome: 'Camisa Branca',
-      preco: 149.99,
-      imagem: 'https://lh4.googleusercontent.com/ll_CkXC2pC3xLefRhSlabplhRgDE2M7274Jf-7mB3R2s0HrJvHD_xatBDVjYOh0nRY4Jj5UjSAjDjqtCSjEsODlg_Ob9hW6VzhFmZCBbK_co1SWC2A2qCrHYpAkoKwnk2lxAv6G3Zzrc_eRhLXQ5uuFU30lRd0DEpn56SmbuUt-r-iarvVHo2A=w1280',
-      descricao:
-        'Camisa reserva branca do Ribeirense, ideal para jogos fora de casa.',
-      estoque: 12,
-      categoria: 'Camisa',
-    },
-    {
-      id: 3,
-      nome: 'Camisa Preta',
-      preco: 159.99,
-      imagem: 'https://lh5.googleusercontent.com/_0QdoAkkphfVSIeZe-Vead7_hbOBIlxsacdVVW8UZ6uVmHnz29ZTdEAWGfFc2Y9UsDFJTTof-9v7onEOlX5vCYmHB2geJ8ZHjIRTlzw5LFoyYthX0XcUu48EYhiHJ02qwN1FVEC4G_HW4GFtY7DPgkEotzSsdm2pKEt4mMnvOpJGdZM2KYcS9A=w1280',
-      descricao: 'Camisa preta do Ribeirense, edição limitada retrô.',
-      estoque: 8,
-      categoria: 'Camisa',
-    },
-    {
-      id: 4,
-      nome: 'Camisa Roxa - Goleiro',
-      preco: 169.99,
-      imagem: 'https://lh4.googleusercontent.com/4ohCK6_gKiHcqmycLmOy3f-a1TgJsKCTTZYeT7agmokcm_LumDECIPIOBaGc0gE--18Oi0WbQCdDf0WFt74mORep8E-hvN1LAoVNuVpmRWo27nIv7cApXD-4cwaIZuAKp_exYhYRUw1i66HoRPiQYaypvthp7sLD99T_r9aO27fhISj7oGA7NA=w1280',
-      descricao:
-        'Camisa roxa de goleiro do Ribeirense, design exclusivo da temporada.',
-      estoque: 10,
-      categoria: 'Camisa',
-    },
-    {
-      id: 5,
-      nome: 'Camisa eSports',
-      preco: 139.99,
-      imagem: 'https://lh3.googleusercontent.com/hVZgMtYhtwZx_XyEYq9gXe4e3Rwstcy5ekUlEkNPIBJrJ3qas0tMFwydhfQBTuA5yzG7C6QgtUUDGgvlBM9_brgueH0src5wGW4zAz8cHqGWwFWcNii83xGUxJW8alyGBr_S_DTsJDl7Hbflp_LJk-_qvx26yRMupehI9iKDLtmJYONV4hsTQg=w1280',
-      descricao:
-        'Camisa oficial da line eSports do Ribeirense, estilo moderno e casual.',
-      estoque: 20,
-      categoria: 'Camisa',
-    },
-    {
-      id: 6,
-      nome: 'Meião Branco',
-      preco: 64.99,
-      imagem: 'https://imgnike-a.akamaihd.net/360x360/01730551.jpg',
-      descricao:
-        'Conforto antissuor, caimento confortável e durabilidade para o jogo.',
-      estoque: 25,
-      categoria: 'Meião',
-    },
-    {
-      id: 7,
-      nome: 'Meião Azul',
-      preco: 64.99,
-      imagem: 'https://imgnike-a.akamaihd.net/360x360/01730515.jpg',
-      descricao:
-        'Conforto antissuor, caimento confortável e durabilidade para o jogo.',
-      estoque: 18,
-      categoria: 'Meião',
-    },
-    {
-      id: 8,
-      nome: 'Calção Preto',
-      preco: 109.99,
-      imagem: 'https://lh5.googleusercontent.com/FPbUnAxG0hGNVHczEqN4Gz8vRQj5Z3csux98B78XovAuDhR3QWTZdDFZLACC6jVTtPQKA8_TXi-iGjBPbzzVRSMedQtTjBMAzYEHrjPeDxwtdDYVpYiKRrHtDWLEIqWhrK4TCzI5pFQZjWRdw1nvWsViXH1yTA7vQW1IVLdjVwtEPzISYN-6=w1280',
-      descricao:
-        'Calção preto edição especial do Ribeirense, combina com a camisa retrô.',
-      estoque: 10,
-      categoria: 'Calção',
-    },
-    {
-      id: 9,
-      nome: 'Calção Roxo - Goleiro',
-      preco: 119.99,
-      imagem:'https://lh3.googleusercontent.com/ZoR2wFp7JD5uFraIje0jOiLg_dWVGyF1Lqf5kxATp34_5qXcqoBNNVKn1VaP7W-k7k4HHk0r7Tl3U2YXmdNUW6fpv6MijV_TcAGU_cWEYbQ7we5VfPPY7CdOF-xbiNum-0oHqLhsq7wumz4_Q6HcxzR17vCtuz-Gr7uzqvwp5P_jcEOpJiHNDw=w1280',
-      descricao:
-        'Calção roxo de goleiro do Ribeirense, resistente e confortável.',
-      estoque: 14,
-      categoria: 'Calção',
-    },
+    // ... outros produtos
   ];
 
+  // navegar para os detalhes de um produto
   const abrirDetalhesProduto = (produto) => {
     navigation.navigate('TelaDetalhes', {
-      produtoSelecionado: produto,
+      produtoSelecionado: produto,   // envia produto para a próxima tela
       origemNavegacao: 'lista_produtos',
-      timestampVisita: Date.now(),
+      timestampVisita: Date.now(),   // salva hora da visita
     });
   };
 
+  // renderização de cada item da lista
   const renderizarProduto = ({ item }) => (
     <TouchableOpacity
       style={estilos.itemProduto}
       onPress={() => abrirDetalhesProduto(item)}>
-      <Image source={item.imagem} style={estilos.imagemProduto} />
+      {/* Imagem do produto */}
+      <Image source={{ uri: item.imagem }} style={estilos.imagemProduto} />
+
+      {/* informações do produto */}
       <View style={estilos.infoProduto}>
         <Text style={estilos.nomeProduto}>{item.nome}</Text>
         <Text style={estilos.precoProduto}>R$ {item.preco.toFixed(2)}</Text>
@@ -133,19 +65,57 @@ function TelaListaProdutos({ navigation }) {
           {item.descricao}
         </Text>
       </View>
+
+      {/* icone de seta à direita */}
       <Text style={estilos.setaDireita}>▶</Text>
     </TouchableOpacity>
   );
 
   return (
-    <SafeAreaView style={estilos.container}>
-      <FlatList
-        data={produtos}
-        keyExtractor={(item) => item.id.toString()}
-        renderItem={renderizarProduto}
-        showsVerticalScrollIndicator={false}
-      />
-    </SafeAreaView>
+    <ScrollView>
+      <SafeAreaView style={estilos.container}>
+        {/* cabeçalho com logo e título */}
+        <View style={estilos.header}>
+          <Image
+            source={{
+              uri: 'https://i.ytimg.com/vi/xSUfdimXEbk/maxresdefault.jpg',
+            }}
+            style={estilos.logo}
+          />
+          <Text style={estilos.titulo}>RIBEIRENSE</Text>
+        </View>
+
+        {/* lista de produtos */}
+        <FlatList
+          data={produtos}
+          keyExtractor={(item) => item.id.toString()}
+          renderItem={renderizarProduto}
+          showsVerticalScrollIndicator={false}
+        />
+
+        {/* feedback visual da rotação */}
+        <View
+          style={[
+            estilos.containerRotacao,
+            { backgroundColor: paisagem ? '#4CAF50' : '#1976D2' },
+          ]}>
+          <Text style={estilos.textoRotacao}>
+            {paisagem ? 'Modo de paisagem detectado 😀' : 'Modo retrato 🙃'}
+          </Text>
+        </View>
+
+        <View style={estilos.footer}>
+          <Text style={estilos.titulo}>Projeto realizado por grupo 2</Text>
+          <View style={estilos.lista}>
+            <Text style={estilos.integrante}>• Agatha França</Text>
+            <Text style={estilos.integrante}>• Ana Beatriz</Text>
+            <Text style={estilos.integrante}>• Juan Lopes</Text>
+            <Text style={estilos.integrante}>• Lucas Marin</Text>
+            <Text style={estilos.integrante}>• Zayra França</Text>
+          </View>
+        </View>
+      </SafeAreaView>
+    </ScrollView>
   );
 }
 
@@ -158,9 +128,23 @@ const estilos = StyleSheet.create({
     backgroundColor: '#fff',
   },
   titulo: {
-    fontSize: 22,
+    fontSize: 30,
     fontWeight: 'bold',
-    marginBottom: 12,
+    marginBottom: 10,
+    color: '#fff',
+    textAlign: 'center',
+    marginTop: 6,
+  },
+  header: {
+    backgroundColor: '#094fd3',
+    paddingVertical: 16,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: 10,
+  },
+  logo: {
+    width: 220,
+    height: 90,
   },
   itemProduto: {
     flexDirection: 'row',
@@ -197,5 +181,34 @@ const estilos = StyleSheet.create({
   setaDireita: {
     fontSize: 20,
     marginLeft: 8,
+  },
+  containerRotacao: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 14,
+    marginTop: 10,
+    marginBottom: 10,
+    borderRadius: 8,
+  },
+  textoRotacao: {
+    color: '#fff',
+    fontSize: 16,
+    fontWeight: 'bold',
+    textAlign: 'center',
+  },
+  footer: {
+    backgroundColor: '#094fd3',
+    padding: 16,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  lista: {
+    marginTop: 4,
+    paddingLeft: 12,
+  },
+  integrante: {
+    fontSize: 16,
+    color: '#fff',
+    marginVertical: 2,
   },
 });
