@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, Image, TouchableOpacity, StyleSheet, Alert, ScrollView, Dimensions } from 'react-native';
 
 function TelaDetalhesProduto({ route, navigation }) {
@@ -70,6 +70,7 @@ function TelaDetalhesProduto({ route, navigation }) {
           <Text style={estilos.chip}>M</Text>
           <Text style={estilos.chip}>G</Text>
         </View>
+        </View>
 
         {/* Seletor de quantidade */}
         <View style={estilos.seletorQuantidade}>
@@ -91,7 +92,6 @@ function TelaDetalhesProduto({ route, navigation }) {
               <Text style={estilos.textoQuantidade}>+</Text>
             </TouchableOpacity>
           </View>
-        </View>
 
         {/* Botão adicionar ao carrinho */}
         <TouchableOpacity
@@ -100,7 +100,7 @@ function TelaDetalhesProduto({ route, navigation }) {
         >
           <Text style={estilos.textoBotaoComprar}>🛒 Adicionar ao carrinho</Text>
         </TouchableOpacity>
-            </View>
+        </View>
    
       {/* Feedback de rotação */}
       <View style={[estilos.containerRotacao, { backgroundColor: paisagem ? '#4CAF50' : '#1976D2' }]}>
