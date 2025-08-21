@@ -100,6 +100,7 @@ function TelaDetalhesProduto({ route, navigation }) {
         >
           <Text style={estilos.textoBotaoComprar}>🛒 Adicionar ao carrinho</Text>
         </TouchableOpacity>
+            </View>
    
       {/* Feedback de rotação */}
       <View style={[estilos.containerRotacao, { backgroundColor: paisagem ? '#4CAF50' : '#1976D2' }]}>
