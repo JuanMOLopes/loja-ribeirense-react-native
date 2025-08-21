@@ -73,23 +73,23 @@ function TelaListaProdutos({ navigation }) {
     },
     {
       id: 6,
-      nome: 'Calção Azul',
-      preco: 99.99,
-      imagem: 'https://lh6.googleusercontent.com/QylPU771Eu9deVzchGW99YDcHCt-MRW7tven9TBF0azG_buPTt6wkVhACNFxpdeLb4sWdRGUPV3HlxWV9Jg3A0AYJBGmHG0Jufc8GNYp2guzX6mPtL0QAqc3kBv0GutqhgvQpRpww5TV9vTrMn8915gnei-z6hzwUslvncqvVr9HCWyzVAN4=w1280',
+      nome: 'Meião Branco',
+      preco: 64.99,
+      imagem: 'https://imgnike-a.akamaihd.net/360x360/01730551.jpg',
       descricao:
-        'Calção azul do uniforme principal do Ribeirense, tecido dry-fit.',
+        'Conforto antissuor, caimento confortável e durabilidade para o jogo.',
       estoque: 25,
-      categoria: 'Calção',
+      categoria: 'Meião',
     },
     {
       id: 7,
-      nome: 'Calção Branco',
-      preco: 99.99,
-      imagem: 'https://lh6.googleusercontent.com/mnN_QAR6j4toqz_X4244ilTgpDsbTbU8H4GQwab0h1N-zr1VCGIYVWdQKHsYUm_BovLAtGdq_Y9MQRMEsZvcX9dOdQzVdliphO5lxqBEteAqaheW73YWO85k8z8-qFAl0O3x0JWtcMB0Vm9FxOEywMcAKViM6EeHP9XBkcaYZzN_z1A9edRFVg=w1280',
+      nome: 'Meião Azul',
+      preco: 64.99,
+      imagem: 'https://imgnike-a.akamaihd.net/360x360/01730515.jpg',
       descricao:
-        'Calção branco do uniforme reserva do Ribeirense, conforto e leveza.',
+        'Conforto antissuor, caimento confortável e durabilidade para o jogo.',
       estoque: 18,
-      categoria: 'Calção',
+      categoria: 'Meião',
     },
     {
       id: 8,
@@ -109,16 +109,6 @@ function TelaListaProdutos({ navigation }) {
       descricao:
         'Calção roxo de goleiro do Ribeirense, resistente e confortável.',
       estoque: 14,
-      categoria: 'Calção',
-    },
-    {
-      id: 10,
-      nome: 'Calção eSports',
-      preco: 89.99,
-      imagem: CalcaoEsports,
-      descricao:
-        'Calção do uniforme eSports do Ribeirense, design estilizado e leve.',
-      estoque: 22,
       categoria: 'Calção',
     },
   ];
