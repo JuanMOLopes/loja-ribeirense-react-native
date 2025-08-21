@@ -14,8 +14,8 @@ function TelaLogin({ navigation }) { // para navegação entre telas
   const [usuario, setUsuario] = useState('');
   const [senha, setSenha] = useState('');
   const [mensagemModal, setMensagemModal] = useState('');
-  const [loginConcluido, setLoginConcluido] = useState(false);
-  const [loading, setLoading] = useState(false); // Estado para o ActivityIndicator
+  const [loginConcluido, setLoginConcluido] = useState(false); // Controlar a exibição do botão "Fechar" no modal.
+  const [loading, setLoading] = useState(false); //define se o spinner vai aparecer ou não
 
   const usuarioValido = [
     {
