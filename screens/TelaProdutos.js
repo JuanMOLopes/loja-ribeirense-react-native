@@ -26,7 +26,7 @@ function TelaListaProdutos({ navigation }) {
       id: 1,
       nome: 'Camisa Azul',
       preco: 149.99,
-      imagem: CamisaAzul,
+      imagem: 'https://lh6.googleusercontent.com/wLPViIiYWtdaPtwIou8_y1FPLMJGKw_EWBYdvZnw1Vn-Ed1ofSyxzPVjzXbBIVNttPxTJLLNtOJ-SnRkFdCZ7AFCF485eKmzMr9O5bF6VEfOQPZbrD9Rsz1psJi7ReaxW24E8At1kZTs4VktyO51UpdANe7koGzOKa2lDoLP020Be6J1SoY9HQ=w1280',
       descricao:
         'Camisa oficial azul do Ribeirense, modelo 2025. Tecido leve e respirável.',
       estoque: 15,
@@ -36,7 +36,7 @@ function TelaListaProdutos({ navigation }) {
       id: 2,
       nome: 'Camisa Branca',
       preco: 149.99,
-      imagem: CamisaBranca,
+      imagem: 'https://lh4.googleusercontent.com/ll_CkXC2pC3xLefRhSlabplhRgDE2M7274Jf-7mB3R2s0HrJvHD_xatBDVjYOh0nRY4Jj5UjSAjDjqtCSjEsODlg_Ob9hW6VzhFmZCBbK_co1SWC2A2qCrHYpAkoKwnk2lxAv6G3Zzrc_eRhLXQ5uuFU30lRd0DEpn56SmbuUt-r-iarvVHo2A=w1280',
       descricao:
         'Camisa reserva branca do Ribeirense, ideal para jogos fora de casa.',
       estoque: 12,
@@ -46,7 +46,7 @@ function TelaListaProdutos({ navigation }) {
       id: 3,
       nome: 'Camisa Preta',
       preco: 159.99,
-      imagem: CamisaPreta,
+      imagem: 'https://lh5.googleusercontent.com/_0QdoAkkphfVSIeZe-Vead7_hbOBIlxsacdVVW8UZ6uVmHnz29ZTdEAWGfFc2Y9UsDFJTTof-9v7onEOlX5vCYmHB2geJ8ZHjIRTlzw5LFoyYthX0XcUu48EYhiHJ02qwN1FVEC4G_HW4GFtY7DPgkEotzSsdm2pKEt4mMnvOpJGdZM2KYcS9A=w1280',
       descricao: 'Camisa preta do Ribeirense, edição limitada retrô.',
       estoque: 8,
       categoria: 'Camisa',
@@ -55,7 +55,7 @@ function TelaListaProdutos({ navigation }) {
       id: 4,
       nome: 'Camisa Roxa - Goleiro',
       preco: 169.99,
-      imagem: CamisaRoxa,
+      imagem: 'https://lh4.googleusercontent.com/4ohCK6_gKiHcqmycLmOy3f-a1TgJsKCTTZYeT7agmokcm_LumDECIPIOBaGc0gE--18Oi0WbQCdDf0WFt74mORep8E-hvN1LAoVNuVpmRWo27nIv7cApXD-4cwaIZuAKp_exYhYRUw1i66HoRPiQYaypvthp7sLD99T_r9aO27fhISj7oGA7NA=w1280',
       descricao:
         'Camisa roxa de goleiro do Ribeirense, design exclusivo da temporada.',
       estoque: 10,
@@ -65,7 +65,7 @@ function TelaListaProdutos({ navigation }) {
       id: 5,
       nome: 'Camisa eSports',
       preco: 139.99,
-      imagem: CamisaEsports,
+      imagem: 'https://lh3.googleusercontent.com/hVZgMtYhtwZx_XyEYq9gXe4e3Rwstcy5ekUlEkNPIBJrJ3qas0tMFwydhfQBTuA5yzG7C6QgtUUDGgvlBM9_brgueH0src5wGW4zAz8cHqGWwFWcNii83xGUxJW8alyGBr_S_DTsJDl7Hbflp_LJk-_qvx26yRMupehI9iKDLtmJYONV4hsTQg=w1280',
       descricao:
         'Camisa oficial da line eSports do Ribeirense, estilo moderno e casual.',
       estoque: 20,
@@ -75,7 +75,7 @@ function TelaListaProdutos({ navigation }) {
       id: 6,
       nome: 'Calção Azul',
       preco: 99.99,
-      imagem: CalcaoAzul,
+      imagem: 'https://lh6.googleusercontent.com/QylPU771Eu9deVzchGW99YDcHCt-MRW7tven9TBF0azG_buPTt6wkVhACNFxpdeLb4sWdRGUPV3HlxWV9Jg3A0AYJBGmHG0Jufc8GNYp2guzX6mPtL0QAqc3kBv0GutqhgvQpRpww5TV9vTrMn8915gnei-z6hzwUslvncqvVr9HCWyzVAN4=w1280',
       descricao:
         'Calção azul do uniforme principal do Ribeirense, tecido dry-fit.',
       estoque: 25,
@@ -85,7 +85,7 @@ function TelaListaProdutos({ navigation }) {
       id: 7,
       nome: 'Calção Branco',
       preco: 99.99,
-      imagem: CalcaoBranco,
+      imagem: 'https://lh6.googleusercontent.com/mnN_QAR6j4toqz_X4244ilTgpDsbTbU8H4GQwab0h1N-zr1VCGIYVWdQKHsYUm_BovLAtGdq_Y9MQRMEsZvcX9dOdQzVdliphO5lxqBEteAqaheW73YWO85k8z8-qFAl0O3x0JWtcMB0Vm9FxOEywMcAKViM6EeHP9XBkcaYZzN_z1A9edRFVg=w1280',
       descricao:
         'Calção branco do uniforme reserva do Ribeirense, conforto e leveza.',
       estoque: 18,
@@ -95,7 +95,7 @@ function TelaListaProdutos({ navigation }) {
       id: 8,
       nome: 'Calção Preto',
       preco: 109.99,
-      imagem: CalcaoPreto,
+      imagem: 'https://lh5.googleusercontent.com/FPbUnAxG0hGNVHczEqN4Gz8vRQj5Z3csux98B78XovAuDhR3QWTZdDFZLACC6jVTtPQKA8_TXi-iGjBPbzzVRSMedQtTjBMAzYEHrjPeDxwtdDYVpYiKRrHtDWLEIqWhrK4TCzI5pFQZjWRdw1nvWsViXH1yTA7vQW1IVLdjVwtEPzISYN-6=w1280',
       descricao:
         'Calção preto edição especial do Ribeirense, combina com a camisa retrô.',
       estoque: 10,
@@ -105,7 +105,7 @@ function TelaListaProdutos({ navigation }) {
       id: 9,
       nome: 'Calção Roxo - Goleiro',
       preco: 119.99,
-      imagem: CalcaoRoxo,
+      imagem:'https://lh3.googleusercontent.com/ZoR2wFp7JD5uFraIje0jOiLg_dWVGyF1Lqf5kxATp34_5qXcqoBNNVKn1VaP7W-k7k4HHk0r7Tl3U2YXmdNUW6fpv6MijV_TcAGU_cWEYbQ7we5VfPPY7CdOF-xbiNum-0oHqLhsq7wumz4_Q6HcxzR17vCtuz-Gr7uzqvwp5P_jcEOpJiHNDw=w1280',
       descricao:
         'Calção roxo de goleiro do Ribeirense, resistente e confortável.',
       estoque: 14,
