@@ -7,7 +7,8 @@ import {
   Image,
   StyleSheet,
   SafeAreaView,
-  Dimensions
+  Dimensions,
+  ScrollView,
 } from 'react-native';
 
 function TelaListaProdutos({ navigation }) {
@@ -113,7 +114,8 @@ function TelaListaProdutos({ navigation }) {
       id: 9,
       nome: 'Calção Roxo - Goleiro',
       preco: 119.99,
-      imagem: 'https://lh4.googleusercontent.com/R4T-WVTF42hm0CVI72WutPbwIS2gqAQSa_NGjrGi83WxRIAF8UJZTND6PrU48o_7jkIDMdWRekbRVWkKf-6CYkgecOdcDbGt-0eKjAaxSJunHlHEfxPr_PT-iu8SUB8VjMWYZ2y8-18CUoUBi5FRFom-qcp-nADO57s4fIrMr9DuRKZQz6aUHg=w1280',
+      imagem:
+        'https://lh4.googleusercontent.com/R4T-WVTF42hm0CVI72WutPbwIS2gqAQSa_NGjrGi83WxRIAF8UJZTND6PrU48o_7jkIDMdWRekbRVWkKf-6CYkgecOdcDbGt-0eKjAaxSJunHlHEfxPr_PT-iu8SUB8VjMWYZ2y8-18CUoUBi5FRFom-qcp-nADO57s4fIrMr9DuRKZQz6aUHg=w1280',
       descricao:
         'Calção roxo de goleiro do Ribeirense, resistente e confortável.',
       estoque: 14,
@@ -166,25 +168,51 @@ function TelaListaProdutos({ navigation }) {
   );
 
   return (
-    <SafeAreaView style={estilos.container}>
-      <FlatList
-        data={produtos}
-        keyExtractor={(item) => item.id.toString()}
-        renderItem={renderizarProduto}
-        showsVerticalScrollIndicator={false}
-      />
+    <ScrollView>
+      <SafeAreaView style={estilos.container}>
+        <View style={estilos.header}>
+          <Image
+            source={{
+              uri: 'https://i.ytimg.com/vi/xSUfdimXEbk/maxresdefault.jpg',
+            }}
+            style={estilos.logo}
+          />
+          <Text style={estilos.titulo}>RIBEIRENSE</Text>
+        </View>
 
-      {/* Feedback de rotação */}
-      <View
-        style={[
-          estilos.containerRotacao,
-          { backgroundColor: paisagem ? '#4CAF50' : '#1976D2' },
-        ]}>
-        <Text style={estilos.textoRotacao}>
-          {paisagem ? 'Modo de paisagem detectado 😀' : 'Modo retrato 🙃'}
-        </Text>
-      </View>
-    </SafeAreaView>
+        <FlatList
+          data={produtos}
+          keyExtractor={(item) => item.id.toString()}
+          renderItem={renderizarProduto}
+          showsVerticalScrollIndicator={false}
+        />
+
+        {/* Feedback de rotação */}
+        <View
+          style={[
+            estilos.containerRotacao,
+            { backgroundColor: paisagem ? '#4CAF50' : '#1976D2' },
+          ]}>
+          <Text style={estilos.textoRotacao}>
+            {paisagem ? 'Modo de paisagem detectado 😀' : 'Modo retrato 🙃'}
+          </Text>
+        </View>
+
+        <View style={estilos.footer}>
+          <Text style={estilos.titulo}>
+            Projeto realizado por grupo 2
+          </Text>
+
+          <View style={estilos.lista}>
+            <Text style={estilos.integrante}>• Agatha França</Text>
+            <Text style={estilos.integrante}>• Ana Beatriz</Text>
+            <Text style={estilos.integrante}>• Juan Lopes</Text>
+            <Text style={estilos.integrante}>• Lucas Marin</Text>
+            <Text style={estilos.integrante}>• Zayra França</Text>
+          </View>
+        </View>
+      </SafeAreaView>
+    </ScrollView>
   );
 }
 
@@ -197,9 +225,23 @@ const estilos = StyleSheet.create({
     backgroundColor: '#fff',
   },
   titulo: {
-    fontSize: 22,
+    fontSize: 30,
     fontWeight: 'bold',
-    marginBottom: 12,
+    marginBottom: 10,
+    color: '#fff',
+    textAlign: 'center',
+    marginTop: 6,
+  },
+  header: {
+    backgroundColor: '#094fd3',
+    paddingVertical: 16,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: 10,
+  },
+  logo: {
+    width: 220,
+    height: 90,
   },
   itemProduto: {
     flexDirection: 'row',
@@ -242,6 +284,7 @@ const estilos = StyleSheet.create({
     alignItems: 'center',
     padding: 14,
     marginTop: 10,
+    marginBottom: 10,
     borderRadius: 8,
   },
   textoRotacao: {
@@ -249,5 +292,20 @@ const estilos = StyleSheet.create({
     fontSize: 16,
     fontWeight: 'bold',
     textAlign: 'center',
+  },
+  footer: {
+    backgroundColor: '#094fd3', 
+    padding: 16,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  lista: {
+    marginTop: 4,
+    paddingLeft: 12,
+  },
+  integrante: {
+    fontSize: 16,
+    color: '#fff',
+    marginVertical: 2,
   },
 });
