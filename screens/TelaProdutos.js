@@ -13,15 +13,16 @@ import {
 
 function TelaListaProdutos({ navigation }) {
   const [tela, setTela] = useState(Dimensions.get('window'));
-
+// guarda as dimensões atuais da tela
   useEffect(() => {
     const callback = ({ window }) => setTela(window);
+      // hook para atualizar dimensões quando girar a tela
     const subscription = Dimensions.addEventListener('change', callback);
-    return () => subscription?.remove();
+    return () => subscription?.remove(); // remove listener quando desmontar
   }, []);
-
+  // verifica se a tela está em modo paisagem
   const paisagem = tela.width > tela.height;
-
+// lista de produtos disponíveis
   const produtos = [
     {
       id: 1,
@@ -142,20 +143,22 @@ function TelaListaProdutos({ navigation }) {
       categoria: 'Meião',
     },
   ];
-
+// navegar para os detalhes de um produto
   const abrirDetalhesProduto = (produto) => {
     navigation.navigate('TelaDetalhes', {
-      produtoSelecionado: produto,
+      produtoSelecionado: produto, // envia produto para a próxima tela
       origemNavegacao: 'lista_produtos',
-      timestampVisita: Date.now(),
+      timestampVisita: Date.now(),  // salva hora da visita
     });
   };
-
+  // renderização de cada item da lista
   const renderizarProduto = ({ item }) => (
     <TouchableOpacity
       style={estilos.itemProduto}
       onPress={() => abrirDetalhesProduto(item)}>
+        {/* Imagem do produto */}
       <Image source={{ uri: item.imagem }} style={estilos.imagemProduto} />
+         {/* informações do produto */}
       <View style={estilos.infoProduto}>
         <Text style={estilos.nomeProduto}>{item.nome}</Text>
         <Text style={estilos.precoProduto}>R$ {item.preco.toFixed(2)}</Text>
@@ -163,6 +166,7 @@ function TelaListaProdutos({ navigation }) {
           {item.descricao}
         </Text>
       </View>
+        {/* icone de seta à direita */}
       <Text style={estilos.setaDireita}>▶</Text>
     </TouchableOpacity>
   );
@@ -170,6 +174,7 @@ function TelaListaProdutos({ navigation }) {
   return (
     <ScrollView>
       <SafeAreaView style={estilos.container}>
+      {/* cabeçalho com logo e título */}
         <View style={estilos.header}>
           <Image
             source={{
@@ -180,6 +185,7 @@ function TelaListaProdutos({ navigation }) {
           <Text style={estilos.titulo}>RIBEIRENSE</Text>
         </View>
 
+{/* lista de produtos */}
         <FlatList
           data={produtos}
           keyExtractor={(item) => item.id.toString()}
