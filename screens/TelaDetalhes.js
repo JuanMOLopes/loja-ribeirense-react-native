@@ -1,39 +1,17 @@
 import React, { useState } from 'react';
-import {
-  View,
-  Text,
-  Image,
-  TouchableOpacity,
-  StyleSheet,
-  Alert,
-} from 'react-native';
-
-// Import das imagens
-import CamisaAzul from '../assets/CamisaAzul.png';
-import CamisaBranca from '../assets/CamisaBranca.png';
-import CamisaPreta from '../assets/CamisaPreta.png';
-import CamisaRoxa from '../assets/CamisaRoxa.png';
-import CamisaEsports from '../assets/CamisaeSports.png';
-import CalcaoAzul from '../assets/CalcaoAzul.png';
-import CalcaoBranco from '../assets/CalcaoBranco.png';
-import CalcaoPreto from '../assets/CalcaoPreto.png';
-import CalcaoRoxo from '../assets/CalcaoRoxo.png';
-import CalcaoEsports from '../assets/CalcaoeSports.png';
+import { View, Text, Image, TouchableOpacity, StyleSheet, Alert } from 'react-native';
 
 function TelaDetalhesProduto({ route, navigation }) {
   const { produtoSelecionado, origemNavegacao } = route.params;
   const [quantidade, setQuantidade] = useState(1);
 
   const adicionarAoCarrinho = () => {
-    Alert.alert(
-      `Sucesso! 🎉',
-      ${quantidade} ${produtoSelecionado.nome} adicionado(s) ao carrinho!`,
+     Alert.alert(
+      'Sucesso! 🎉',
+      `${quantidade} ${produtoSelecionado.nome} adicionado(s) ao carrinho!`,
       [
         { text: 'Continuar Comprando', onPress: () => navigation.goBack() },
-        {
-          text: 'Ver Carrinho',
-          onPress: () => console.log('Ir para carrinho'),
-        },
+        { text: 'Ver Carrinho', onPress: () => console.log('Ir para carrinho') },
       ]
     );
   };
@@ -50,7 +28,8 @@ function TelaDetalhesProduto({ route, navigation }) {
       {/* Botão voltar */}
       <TouchableOpacity
         style={estilos.botaoVoltar}
-        onPress={() => navigation.goBack()}>
+        onPress={() => navigation.goBack()}
+      >
         <Text style={estilos.textoVoltar}>⬅ Voltar</Text>
       </TouchableOpacity>
 
@@ -60,28 +39,32 @@ function TelaDetalhesProduto({ route, navigation }) {
         style={estilos.imagemGrande}
       />
 
-      {/* Detalhes do produto */}
+      {/* Detalhes do produto */} //tofixed: duas casas decimal 
       <View style={estilos.detalhesContainer}>
         <Text style={estilos.nomeProdutoGrande}>{produtoSelecionado.nome}</Text>
-        <Text style={estilos.categoriaProduto}>
-          {produtoSelecionado.categoria}
-        </Text>
+       <Text style={estilos.descricaoProduto}>{produtoSelecionado.descricao}</Text>
         <Text style={estilos.precoProdutoGrande}>
           R$ {produtoSelecionado.preco.toFixed(2)}
         </Text>
-        <Text style={estilos.descricaoProduto}>
-          {produtoSelecionado.descricao}
-        </Text>
+        
 
         {/* Extras */}
-        <View style={estilos.infoExtras}>
-          <Text style={estilos.estoque}>
-            📦 Estoque: {produtoSelecionado.estoque} unidades
-          </Text>
-          <Text style={estilos.avaliacao}>
-            ⭐ {produtoSelecionado.avaliacoes} (123 avaliações)
-          </Text>
-        </View>
+
+        <Text style={estilos.estoque}>Modelo: </Text>
+
+        <View style={estilos.alinhamento}>
+          <Text style={{backgroundColor: '#d3d3d3', marginRight: 10, borderRadius:25}}> Masculino</Text>
+           <Text style={{backgroundColor: '#d3d3d3', marginRight: 10, borderRadius:25}}> Feminino</Text>
+    </View>
+
+           <Text style={estilos.estoque}>Tamanhos disponíveis: </Text>
+
+            <View style={estilos.alinhamento}>
+          <Text style={{backgroundColor: '#d3d3d3', marginRight: 10, borderRadius:25 }}> PP</Text>
+           <Text style={{backgroundColor: '#d3d3d3', marginRight: 10, borderRadius:25}}> P</Text>
+            <Text style={{backgroundColor: '#d3d3d3', marginRight: 10, borderRadius:25}}> M</Text>
+             <Text style={{backgroundColor: '#d3d3d3', marginRight: 10, borderRadius:25}}> G</Text>
+              </View>
 
         {/* Seletor de quantidade */}
         <View style={estilos.seletorQuantidade}>
@@ -89,7 +72,8 @@ function TelaDetalhesProduto({ route, navigation }) {
           <View style={estilos.controlesQuantidade}>
             <TouchableOpacity
               style={estilos.botaoQuantidade}
-              onPress={() => alterarQuantidade(-1)}>
+              onPress={() => alterarQuantidade(-1)}
+            >
               <Text style={estilos.textoQuantidade}>-</Text>
             </TouchableOpacity>
 
@@ -97,7 +81,8 @@ function TelaDetalhesProduto({ route, navigation }) {
 
             <TouchableOpacity
               style={estilos.botaoQuantidade}
-              onPress={() => alterarQuantidade(1)}>
+              onPress={() => alterarQuantidade(1)}
+            >
               <Text style={estilos.textoQuantidade}>+</Text>
             </TouchableOpacity>
           </View>
@@ -106,10 +91,9 @@ function TelaDetalhesProduto({ route, navigation }) {
         {/* Botão adicionar ao carrinho */}
         <TouchableOpacity
           style={estilos.botaoComprar}
-          onPress={adicionarAoCarrinho}>
-          <Text style={estilos.textoBotaoComprar}>
-            🛒 Adicionar ao carrinho
-          </Text>
+          onPress={adicionarAoCarrinho}
+        >
+          <Text style={estilos.textoBotaoComprar}>🛒 Adicionar ao carrinho</Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -155,11 +139,6 @@ const estilos = StyleSheet.create({
     color: '#333',
     marginBottom: 6,
   },
-  categoriaProduto: {
-    fontSize: 16,
-    color: '#777',
-    marginBottom: 10,
-  },
   precoProdutoGrande: {
     fontSize: 24,
     fontWeight: 'bold',
@@ -172,17 +151,21 @@ const estilos = StyleSheet.create({
     marginBottom: 14,
     lineHeight: 22,
   },
-  infoExtras: {
-    marginBottom: 18,
-  },
+
   estoque: {
-    fontSize: 15,
+    fontSize: 18,
     color: '#555',
+fontWeight: "bold",
   },
-  avaliacao: {
-    fontSize: 15,
-    color: '#f39c12',
+
+  alinhamento: {
+    flexDirection:"row",
   },
+
+   modelo: {
+    backgroundColor:'#d3d3d3',
+  },
+ 
   seletorQuantidade: {
     flexDirection: 'row',
     alignItems: 'center',
