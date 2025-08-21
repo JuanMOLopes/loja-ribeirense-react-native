@@ -1,12 +1,23 @@
 import React, { useState } from 'react';
-import { View, Text, Image, TouchableOpacity, StyleSheet, Alert,ScrollView } from 'react-native';
+import { View, Text, Image, TouchableOpacity, StyleSheet, Alert, ScrollView, Dimensions } from 'react-native';
 
 function TelaDetalhesProduto({ route, navigation }) {
-  const { produtoSelecionado, origemNavegacao } = route.params;
+  const { produtoSelecionado } = route.params;
   const [quantidade, setQuantidade] = useState(1);
 
+  // Rotação da tela
+  const [tela, setTela] = useState(Dimensions.get('window'));
+
+  useEffect(() => {
+    const callback = ({ window }) => setTela(window);
+    const subscription = Dimensions.addEventListener('change', callback);
+    return () => subscription?.remove();
+  }, []);
+
+  const paisagem = tela.width > tela.height;
+
   const adicionarAoCarrinho = () => {
-     Alert.alert(
+    Alert.alert(
       'Sucesso! 🎉',
       `${quantidade} ${produtoSelecionado.nome} adicionado(s) ao carrinho!`,
       [
@@ -37,32 +48,28 @@ function TelaDetalhesProduto({ route, navigation }) {
         style={estilos.imagemGrande}
       />
 
-      {/* Detalhes do produto */} //tofixed: duas casas decimal 
+      {/* Detalhes do produto */}
       <View style={estilos.detalhesContainer}>
         <Text style={estilos.nomeProdutoGrande}>{produtoSelecionado.nome}</Text>
-       <Text style={estilos.descricaoProduto}>{produtoSelecionado.descricao}</Text>
+        <Text style={estilos.descricaoProduto}>{produtoSelecionado.descricao}</Text>
         <Text style={estilos.precoProdutoGrande}>
           R$ {produtoSelecionado.preco.toFixed(2)}
         </Text>
-        
 
         {/* Extras */}
-
         <Text style={estilos.estoque}>Modelo: </Text>
-
         <View style={estilos.alinhamento}>
-          <Text style={{backgroundColor: '#d3d3d3', marginRight: 10, borderRadius:25}}> Masculino</Text>
-           <Text style={{backgroundColor: '#d3d3d3', marginRight: 10, borderRadius:25}}> Feminino</Text>
-    </View>
+          <Text style={estilos.chip}>Masculino</Text>
+          <Text style={estilos.chip}>Feminino</Text>
+        </View>
 
-           <Text style={estilos.estoque}>Tamanhos disponíveis: </Text>
-
-            <View style={estilos.alinhamento}>
-          <Text style={{backgroundColor: '#d3d3d3', marginRight: 10, borderRadius:25 }}> PP</Text>
-           <Text style={{backgroundColor: '#d3d3d3', marginRight: 10, borderRadius:25}}> P</Text>
-            <Text style={{backgroundColor: '#d3d3d3', marginRight: 10, borderRadius:25}}> M</Text>
-             <Text style={{backgroundColor: '#d3d3d3', marginRight: 10, borderRadius:25}}> G</Text>
-              </View>
+        <Text style={estilos.estoque}>Tamanhos disponíveis: </Text>
+        <View style={estilos.alinhamento}>
+          <Text style={estilos.chip}>PP</Text>
+          <Text style={estilos.chip}>P</Text>
+          <Text style={estilos.chip}>M</Text>
+          <Text style={estilos.chip}>G</Text>
+        </View>
 
         {/* Seletor de quantidade */}
         <View style={estilos.seletorQuantidade}>
@@ -93,8 +100,14 @@ function TelaDetalhesProduto({ route, navigation }) {
         >
           <Text style={estilos.textoBotaoComprar}>🛒 Adicionar ao carrinho</Text>
         </TouchableOpacity>
+   
+      {/* Feedback de rotação */}
+      <View style={[estilos.containerRotacao, { backgroundColor: paisagem ? '#4CAF50' : '#1976D2' }]}>
+        <Text style={estilos.textoRotacao}>
+          {paisagem ? 'Modo de paisagem detectado 😀' : 'Modo retrato 🙃'}
+        </Text>
       </View>
-    </ScrollView>
+      </ScrollView>
   );
 }
 
@@ -149,25 +162,28 @@ const estilos = StyleSheet.create({
     marginBottom: 14,
     lineHeight: 22,
   },
-
   estoque: {
     fontSize: 18,
     color: '#555',
-fontWeight: "bold",
+    fontWeight: 'bold',
+    marginTop: 8,
   },
-
   alinhamento: {
-    flexDirection:"row",
+    flexDirection: 'row',
+    marginBottom: 10,
   },
-
-   modelo: {
-    backgroundColor:'#d3d3d3',
+  chip: {
+    backgroundColor: '#d3d3d3',
+    marginRight: 10,
+    borderRadius: 25,
+    paddingHorizontal: 10,
+    paddingVertical: 4,
   },
- 
   seletorQuantidade: {
     flexDirection: 'row',
     alignItems: 'center',
     marginBottom: 18,
+    marginTop: 10,
   },
   labelQuantidade: {
     fontSize: 16,
@@ -205,6 +221,20 @@ fontWeight: "bold",
     color: '#FFF',
     fontSize: 18,
     fontWeight: 'bold',
+  },
+  containerRotacao: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 20,
+  },
+  textoRotacao: {
+    color: '#fff',
+    fontSize: 20,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    textShadowColor: 'rgba(0, 0, 0, 0.5)',
+    textShadowOffset: { width: 2, height: 2 },
+    textShadowRadius: 4,
   },
 });
 

@@ -8,25 +8,14 @@ import {
   SafeAreaView,
 } from 'react-native';
 
-// Import das imagens
-import CamisaAzul from '../assets/CamisaAzul.png';
-import CamisaBranca from '../assets/CamisaBranca.png';
-import CamisaPreta from '../assets/CamisaPreta.png';
-import CamisaRoxa from '../assets/CamisaRoxa.png';
-import CamisaEsports from '../assets/CamisaeSports.png';
-import CalcaoAzul from '../assets/CalcaoAzul.png';
-import CalcaoBranco from '../assets/CalcaoBranco.png';
-import CalcaoPreto from '../assets/CalcaoPreto.png';
-import CalcaoRoxo from '../assets/CalcaoRoxo.png';
-import CalcaoEsports from '../assets/CalcaoeSports.png';
-
 function TelaListaProdutos({ navigation }) {
   const produtos = [
-    {
+   {
       id: 1,
       nome: 'Camisa Azul',
       preco: 149.99,
-      imagem: CamisaAzul,
+      imagem:
+        'https://lh5.googleusercontent.com/O9ghntqBJSGFvZOEH0b8A3JCwS6hzVVSUYUxG4UR0ZNZUQMmrDxpxLlvchnlI3QNcjCghKfRDtu1BC1DDoVu3lLRSulBOLysnt9qpWS5-USbj9O5bZRBUVjrW39pqTFlTAaOC3VJfVkNcv4lw5viwShAGc-N5q6pJhspeK4oSo5OmmynmRcAeQ=w1280',
       descricao:
         'Camisa oficial azul do Ribeirense, modelo 2025. Tecido leve e respirável.',
       estoque: 15,
@@ -36,7 +25,8 @@ function TelaListaProdutos({ navigation }) {
       id: 2,
       nome: 'Camisa Branca',
       preco: 149.99,
-      imagem: CamisaBranca,
+      imagem:
+        'https://lh5.googleusercontent.com/RrjSTr-ahFF2jt8EDT9_XsFOGNgaB0wH558_3nOb6TNnnSq4HCsvxsplb4pcY6BLIai_hb9c4k4VRzsR00cK9sKc9SJqZdFIzvSps86vgmfQXneiYD5X4ScqHro7xz4n5o9oCxuPwrkfxC8aKLaWi7in2UP6KEi9Z9EHUM8WX4dRZeJFEIIWoA=w1280',
       descricao:
         'Camisa reserva branca do Ribeirense, ideal para jogos fora de casa.',
       estoque: 12,
@@ -46,7 +36,8 @@ function TelaListaProdutos({ navigation }) {
       id: 3,
       nome: 'Camisa Preta',
       preco: 159.99,
-      imagem: CamisaPreta,
+      imagem:
+        'https://lh4.googleusercontent.com/-Xt_JtfFWpUfBIb5txF-hIhQ3Oo08dNRF6IgzsYkLY5MilUoFMwiYZUdPP8EL9DeOjHJl_6QpvIiYmrK6qN5MCDHXoIMXZSjx8evJVMcqovCkgOhEp31eEjBg6ae3QdVFaDVnwoSgYOlHrLPWFK_XFiJhXx30XuUe902ZOuUsWvkIIfju0FcJQ=w1280',
       descricao: 'Camisa preta do Ribeirense, edição limitada retrô.',
       estoque: 8,
       categoria: 'Camisa',
@@ -55,7 +46,8 @@ function TelaListaProdutos({ navigation }) {
       id: 4,
       nome: 'Camisa Roxa - Goleiro',
       preco: 169.99,
-      imagem: CamisaRoxa,
+      imagem:
+        'https://lh3.googleusercontent.com/KT3AXnEWIklLsfqbxFIrfnZq8UXSzY7uXWwK8Xyxf8PzR81RuIEK6c0YOUDxv0DgKnnDIKPlLib-M5VkAp35A_hXLAXmi_TQLTUwChSTuF6JIdL3cRM7KGztMxha1kRg-Bbyldc7O_fijNuWAYnDh96hvJvGCfSjWZYNywwEzZB0dHOYKmyAyA=w1280',
       descricao:
         'Camisa roxa de goleiro do Ribeirense, design exclusivo da temporada.',
       estoque: 10,
@@ -65,7 +57,8 @@ function TelaListaProdutos({ navigation }) {
       id: 5,
       nome: 'Camisa eSports',
       preco: 139.99,
-      imagem: CamisaEsports,
+      imagem:
+        'https://lh5.googleusercontent.com/BvDmf5JmmOapwiGTvkzMRgir4cqNmYPyWBwiz1OUrDHknYbjCUv0zMwPGZ9-EgWgtFyzc4C7TQCxQB0JE1Y8o6KZKJUAED5EFYKJj1aH1M0zZT4xgUkVPWFLFNsMsfVDjgKfiBFYIcoCJ5xOsaACdADG5sZvnpCF5uCY3fSov-DFBpSfvGgI=w1280',
       descricao:
         'Camisa oficial da line eSports do Ribeirense, estilo moderno e casual.',
       estoque: 20,
@@ -75,7 +68,8 @@ function TelaListaProdutos({ navigation }) {
       id: 6,
       nome: 'Calção Azul',
       preco: 99.99,
-      imagem: CalcaoAzul,
+      imagem:
+        'https://lh5.googleusercontent.com/PeGBkuNxRlhBYBGGqtEKqwa5OegOcuq62QsXWfr0QIg9lNNf2Dqx8Ypt9FGat1YC_EnRqCYfInhcW4hpGy3kcqPwgYpUfW8YREyhntepV8SbRqPA4q8wrwMLehKB_l2ejUy2-VIHPZGqrqKm4xpDLGcbjNTSrnIbnY55-MDuKi0w3oXkclWA4Q=w1280',
       descricao:
         'Calção azul do uniforme principal do Ribeirense, tecido dry-fit.',
       estoque: 25,
@@ -85,7 +79,8 @@ function TelaListaProdutos({ navigation }) {
       id: 7,
       nome: 'Calção Branco',
       preco: 99.99,
-      imagem: CalcaoBranco,
+      imagem:
+        'https://lh3.googleusercontent.com/HiAhQsExlVuK5qxJ6vI5Wc_rPvZX1eaD9WTuq4vKmr-ltF_dPw8i-iKNwyME_pU1Ng08FvougyecCcmJ9_KJoNruCB-URof090kUsLdo_u1eknxbxdgG_FSXm0Ab5g-3MeeorQIAWL1CcdkKG4B5iajT0Wq-6O-EXD6TLD_sgLjpr4Y5QGVo3w=w1280',
       descricao:
         'Calção branco do uniforme reserva do Ribeirense, conforto e leveza.',
       estoque: 18,
@@ -95,7 +90,8 @@ function TelaListaProdutos({ navigation }) {
       id: 8,
       nome: 'Calção Preto',
       preco: 109.99,
-      imagem: CalcaoPreto,
+      imagem:
+        'https://lh3.googleusercontent.com/t0ebTS9-ymlKsS0wVNdPhJOgs75g8s6BZxM4CwgVBVCqA6cbzXD5_6R-0qr-gVrmMXi_hgc1GmZ84nl_Z25Ak4CnP608vFiaYulB5JrUPr3_MKC43KXzw9HNcZE14P1YBZUIl_5sKGnEMsNW3Sfv20hpMB5hd4Cou1P1zamFYr5eCGaUBkxf-Q=w1280',
       descricao:
         'Calção preto edição especial do Ribeirense, combina com a camisa retrô.',
       estoque: 10,
@@ -105,7 +101,7 @@ function TelaListaProdutos({ navigation }) {
       id: 9,
       nome: 'Calção Roxo - Goleiro',
       preco: 119.99,
-      imagem: CalcaoRoxo,
+      imagem: 'https://lh4.googleusercontent.com/R4T-WVTF42hm0CVI72WutPbwIS2gqAQSa_NGjrGi83WxRIAF8UJZTND6PrU48o_7jkIDMdWRekbRVWkKf-6CYkgecOdcDbGt-0eKjAaxSJunHlHEfxPr_PT-iu8SUB8VjMWYZ2y8-18CUoUBi5FRFom-qcp-nADO57s4fIrMr9DuRKZQz6aUHg=w1280',
       descricao:
         'Calção roxo de goleiro do Ribeirense, resistente e confortável.',
       estoque: 14,
@@ -113,13 +109,23 @@ function TelaListaProdutos({ navigation }) {
     },
     {
       id: 10,
-      nome: 'Calção eSports',
-      preco: 89.99,
-      imagem: CalcaoEsports,
+      nome: 'Meião Branco',
+      preco: 64.99,
+      imagem: 'https://imgnike-a.akamaihd.net/360x360/01730551.jpg',
       descricao:
-        'Calção do uniforme eSports do Ribeirense, design estilizado e leve.',
-      estoque: 22,
-      categoria: 'Calção',
+        'Conforto antissuor, caimento confortável e durabilidade para o jogo.',
+      estoque: 25,
+      categoria: 'Meião',
+    },
+    {
+      id: 11,
+      nome: 'Meião Azul',
+      preco: 64.99,
+      imagem: 'https://imgnike-a.akamaihd.net/360x360/01730515.jpg',
+      descricao:
+        'Conforto antissuor, caimento confortável e durabilidade para o jogo.',
+      estoque: 18,
+      categoria: 'Meião',
     },
   ];
 
@@ -135,7 +141,7 @@ function TelaListaProdutos({ navigation }) {
     <TouchableOpacity
       style={estilos.itemProduto}
       onPress={() => abrirDetalhesProduto(item)}>
-      <Image source={item.imagem} style={estilos.imagemProduto} />
+      <Image source={{ uri: item.imagem }} style={estilos.imagemProduto} />
       <View style={estilos.infoProduto}>
         <Text style={estilos.nomeProduto}>{item.nome}</Text>
         <Text style={estilos.precoProduto}>R$ {item.preco.toFixed(2)}</Text>
