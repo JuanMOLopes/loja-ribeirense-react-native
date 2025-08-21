@@ -1,3 +1,4 @@
+import React, { useState, useEffect } from 'react';
 import {
   View,
   Text,
@@ -6,11 +7,22 @@ import {
   Image,
   StyleSheet,
   SafeAreaView,
+  Dimensions
 } from 'react-native';
 
 function TelaListaProdutos({ navigation }) {
+  const [tela, setTela] = useState(Dimensions.get('window'));
+
+  useEffect(() => {
+    const callback = ({ window }) => setTela(window);
+    const subscription = Dimensions.addEventListener('change', callback);
+    return () => subscription?.remove();
+  }, []);
+
+  const paisagem = tela.width > tela.height;
+
   const produtos = [
-   {
+    {
       id: 1,
       nome: 'Camisa Azul',
       preco: 149.99,
@@ -161,6 +173,17 @@ function TelaListaProdutos({ navigation }) {
         renderItem={renderizarProduto}
         showsVerticalScrollIndicator={false}
       />
+
+      {/* Feedback de rotação */}
+      <View
+        style={[
+          estilos.containerRotacao,
+          { backgroundColor: paisagem ? '#4CAF50' : '#1976D2' },
+        ]}>
+        <Text style={estilos.textoRotacao}>
+          {paisagem ? 'Modo de paisagem detectado 😀' : 'Modo retrato 🙃'}
+        </Text>
+      </View>
     </SafeAreaView>
   );
 }
@@ -213,5 +236,18 @@ const estilos = StyleSheet.create({
   setaDireita: {
     fontSize: 20,
     marginLeft: 8,
+  },
+  containerRotacao: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 14,
+    marginTop: 10,
+    borderRadius: 8,
+  },
+  textoRotacao: {
+    color: '#fff',
+    fontSize: 16,
+    fontWeight: 'bold',
+    textAlign: 'center',
   },
 });

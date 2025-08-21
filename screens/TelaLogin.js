@@ -1,120 +1,98 @@
-
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
-  View,            
-  Text,            
-  TextInput,       // Campo de entrada de texto
-  TouchableOpacity, // respondam a toques -> animação que reduz a opacidade
-  StyleSheet,      
-  Modal            // Componente para exibir janelas modais
+  View,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  StyleSheet,
+  Modal,
+  Dimensions
 } from 'react-native';
 
-
-
-function TelaLogin({ navigation }) {      // para navegação entre telas
-
+function TelaLogin({ navigation }) {
   const [usuario, setUsuario] = useState('');
   const [senha, setSenha] = useState('');
   const [mensagemModal, setMensagemModal] = useState('');
   const [loginConcluido, setLoginConcluido] = useState(false);
 
+  // Rotação da tela
+  const [tela, setTela] = useState(Dimensions.get('window'));
+
+  useEffect(() => {
+    const callback = ({ window }) => setTela(window);
+    const subscription = Dimensions.addEventListener('change', callback);
+    return () => subscription?.remove();
+  }, []);
+
+  const paisagem = tela.width > tela.height;
 
   const usuarioValido = [
-    {
-      senha: '123',
-      usuario: 'aluno',
-    }
+    { usuario: 'aluno', senha: '123' }
   ];
 
-  // Função que vai validar o login , se os campos não forem preenchidos, vai aparecer a mensagem definida
   const realizarLogin = () => {
     if (!usuario || !senha) {
       setMensagemModal('⚠️ Preencha usuário e senha');
       return;
     }
 
-    // Procura se existe um usuário que bate com os dados digitados
     const usuarioEncontrado = usuarioValido.find(
       user => user.usuario === usuario && user.senha === senha
     );
 
-    // Se encontrou o usuário válido
-
     if (usuarioEncontrado) {
-      // Monta um objeto com dados que podem ser enviados para a próxima tela
-
       const dadosParaEnviar = {
-        usuario: {
-          ...usuarioEncontrado, // copia os dados do usuário
-          senha: undefined      // remove a senha por segurança
-        },
-        
+        usuario: { ...usuarioEncontrado, senha: undefined }
       };
 
-      // Define a mensagem de sucesso no modal
       setMensagemModal('✅ Login concluído');
       setLoginConcluido(true);
 
-      // Aguarda 2 segundos e navega para a tela de lista de produtos
       setTimeout(() => {
-        setMensagemModal(''); // Fecha modal
+        setMensagemModal('');
         navigation.navigate('TelaListaProdutos', dadosParaEnviar);
       }, 2000);
     } else {
-      // Se não encontrou o usuário, mostra mensagem de erro
       setMensagemModal('❌ Usuário ou senha incorretos');
     }
   };
-
 
   return (
     <View style={estilos.container}>
       <Text style={estilos.titulo}>🔐 Login</Text>
       <Text style={estilos.subtitulo}>Entre na sua conta</Text>
 
-
       <TextInput
         style={estilos.input}
         placeholder="usuário"
         value={usuario}
         onChangeText={setUsuario}
-        keyboardType="email-address"
+        keyboardType="default"
       />
 
- 
       <TextInput
         style={estilos.input}
         placeholder="sua senha"
         value={senha}
         onChangeText={setSenha}
-        secureTextEntry // Oculta caracteres
+        secureTextEntry
       />
-
 
       <TouchableOpacity style={estilos.botaoLogin} onPress={realizarLogin}>
         <Text style={estilos.textoBotaoLogin}>👉 Entrar</Text>
       </TouchableOpacity>
 
+      <Text style={estilos.dicaLogin}>💡 Dica: use aluno | 123</Text>
 
-     
-      <Text style={estilos.dicaLogin}>
-        💡 Dica: use aluno | 123
-      </Text>
-
-
-      {/* Modal que mostra mensagens ( se foi bem ou mal sucedido) */}
+      {/* Modal que mostra mensagens */}
       <Modal
-        transparent 
-        animationType="fade" // efeito de transição
-        visible={!!mensagemModal} // aparece se houver mensagem
+        transparent
+        animationType="fade"
+        visible={!!mensagemModal}
       >
-
-
         <View style={estilos.modalContainer}>
           <View style={estilos.modalBox}>
-            {/* Mensagem que será exibida de acordo com as validações */}
             <Text style={estilos.modalTexto}>{mensagemModal}</Text>
-            {/* Botão de fechar (se o login não foi concluído) */}
             {!loginConcluido && (
               <TouchableOpacity
                 style={estilos.modalBotao}
@@ -126,64 +104,62 @@ function TelaLogin({ navigation }) {      // para navegação entre telas
           </View>
         </View>
       </Modal>
+
+      {/* Feedback de rotação sempre visível */}
+      <View style={[estilos.containerRotacao, { backgroundColor: paisagem ? '#4CAF50' : '#1976D2' }]}>
+        <Text style={estilos.textoRotacao}>
+          {paisagem ? 'Modo de paisagem detectado 😀' : 'Modo retrato 🙃'}
+        </Text>
+      </View>
     </View>
   );
 }
 
-
 const estilos = StyleSheet.create({
   container: {
-    flex: 1, // ocupa toda a tela
-    padding: 20, 
-    backgroundColor: '#fff' 
+    flex: 1,
+    padding: 20,
+    backgroundColor: '#fff'
   },
-
   titulo: {
-    fontSize: 24, 
+    fontSize: 24,
     fontWeight: 'bold',
     marginBottom: 10
   },
-
   subtitulo: {
-    fontSize: 16, 
-    color: '#555', 
+    fontSize: 16,
+    color: '#555',
     marginBottom: 20
   },
-
   input: {
     borderWidth: 1,
-    borderColor: '#ccc', 
+    borderColor: '#ccc',
     borderRadius: 8,
-    padding: 10, 
+    padding: 10,
     marginBottom: 15
   },
-  
   botaoLogin: {
-    backgroundColor: '#4CAF50', 
+    backgroundColor: '#4CAF50',
     padding: 15,
-    borderRadius: 8, 
+    borderRadius: 8,
     alignItems: 'center'
   },
-
-  textoBotaoLogin: { 
+  textoBotaoLogin: {
     color: '#fff',
     fontSize: 16,
-    fontWeight: 'bold' 
+    fontWeight: 'bold'
   },
-
-  dicaLogin: { 
+  dicaLogin: {
     marginTop: 15,
     fontSize: 12,
-    color: '#888' 
+    color: '#888'
   },
-
   modalContainer: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'rgba(0,0,0,0.5)' // fundo escuro semi-transparente
+    backgroundColor: 'rgba(0,0,0,0.5)'
   },
-
   modalBox: {
     backgroundColor: '#fff',
     padding: 20,
@@ -191,26 +167,37 @@ const estilos = StyleSheet.create({
     alignItems: 'center',
     minWidth: '70%'
   },
-
-  modalTexto: { 
+  modalTexto: {
     fontSize: 16,
     marginBottom: 15,
-    textAlign: 'center' 
+    textAlign: 'center'
   },
-
   modalBotao: {
     backgroundColor: '#4CAF50',
     paddingHorizontal: 20,
     paddingVertical: 10,
     borderRadius: 8
   },
-
-  modalBotaoTexto: { 
-    color: '#fff', 
-    fontWeight: 'bold' 
-  }
+  modalBotaoTexto: {
+    color: '#fff',
+    fontWeight: 'bold'
+  },
+  containerRotacao: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 20,
+    marginTop: 20,
+    borderRadius: 8
+  },
+  textoRotacao: {
+    color: '#fff',
+    fontSize: 20,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    textShadowColor: 'rgba(0, 0, 0, 0.5)',
+    textShadowOffset: { width: 2, height: 2 },
+    textShadowRadius: 4
+  },
 });
 
-// Exporta o componente para ser usado em outras partes do app
 export default TelaLogin;
-
