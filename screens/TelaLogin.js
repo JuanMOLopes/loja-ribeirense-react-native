@@ -1,23 +1,21 @@
-
 import React, { useState } from 'react';
 import {
   View,            
   Text,            
-  TextInput,       // Campo de entrada de texto
+  TextInput, // Campo de entrada de texto
   TouchableOpacity, // respondam a toques -> animação que reduz a opacidade
-  StyleSheet,      
-  Modal            // Componente para exibir janelas modais
+  StyleSheet,
+  Modal, // Componente para exibir janelas modais
+  ActivityIndicator 
 } from 'react-native';
 
-
-
-function TelaLogin({ navigation }) {      // para navegação entre telas
+function TelaLogin({ navigation }) { // para navegação entre telas
 
   const [usuario, setUsuario] = useState('');
   const [senha, setSenha] = useState('');
   const [mensagemModal, setMensagemModal] = useState('');
   const [loginConcluido, setLoginConcluido] = useState(false);
-
+  const [loading, setLoading] = useState(false); // Estado para o ActivityIndicator
 
   const usuarioValido = [
     {
@@ -26,7 +24,7 @@ function TelaLogin({ navigation }) {      // para navegação entre telas
     }
   ];
 
-  // Função que vai validar o login , se os campos não forem preenchidos, vai aparecer a mensagem definida
+ // Função que vai validar o login , se os campos não forem preenchidos, vai aparecer a mensagem definida
   const realizarLogin = () => {
     if (!usuario || !senha) {
       setMensagemModal('⚠️ Preencha usuário e senha');
@@ -38,40 +36,39 @@ function TelaLogin({ navigation }) {      // para navegação entre telas
       user => user.usuario === usuario && user.senha === senha
     );
 
-    // Se encontrou o usuário válido
 
+  // Se encontrou o usuário válido
     if (usuarioEncontrado) {
-      // Monta um objeto com dados que podem ser enviados para a próxima tela
+  // Monta um objeto com dados que podem ser enviados para a próxima tela
 
       const dadosParaEnviar = {
         usuario: {
           ...usuarioEncontrado, // copia os dados do usuário
-          senha: undefined      // remove a senha por segurança
+          senha: undefined // remove a senha por segurança
         },
-        
       };
 
-      // Define a mensagem de sucesso no modal
+ // Define a mensagem de sucesso no modal
       setMensagemModal('✅ Login concluído');
       setLoginConcluido(true);
+      setLoading(true); //  Mostra o ActivityIndicator
 
-      // Aguarda 2 segundos e navega para a tela de lista de produtos
+ // Aguarda 2 segundos e navega para a tela de lista de produtos
       setTimeout(() => {
-        setMensagemModal(''); // Fecha modal
+        setMensagemModal('');
+        setLoading(false); 
         navigation.navigate('TelaListaProdutos', dadosParaEnviar);
       }, 2000);
     } else {
-      // Se não encontrou o usuário, mostra mensagem de erro
+         // Se não encontrou o usuário, mostra mensagem de erro
       setMensagemModal('❌ Usuário ou senha incorretos');
     }
   };
-
 
   return (
     <View style={estilos.container}>
       <Text style={estilos.titulo}>🔐 Login</Text>
       <Text style={estilos.subtitulo}>Entre na sua conta</Text>
-
 
       <TextInput
         style={estilos.input}
@@ -81,7 +78,6 @@ function TelaLogin({ navigation }) {      // para navegação entre telas
         keyboardType="email-address"
       />
 
- 
       <TextInput
         style={estilos.input}
         placeholder="sua senha"
@@ -90,31 +86,25 @@ function TelaLogin({ navigation }) {      // para navegação entre telas
         secureTextEntry // Oculta caracteres
       />
 
-
       <TouchableOpacity style={estilos.botaoLogin} onPress={realizarLogin}>
         <Text style={estilos.textoBotaoLogin}>👉 Entrar</Text>
       </TouchableOpacity>
 
-
-     
       <Text style={estilos.dicaLogin}>
         💡 Dica: use aluno | 123
       </Text>
 
-
-      {/* Modal que mostra mensagens ( se foi bem ou mal sucedido) */}
       <Modal
         transparent 
-        animationType="fade" // efeito de transição
-        visible={!!mensagemModal} // aparece se houver mensagem
+        animationType="fade"
+        visible={!!mensagemModal}
       >
-
-
         <View style={estilos.modalContainer}>
           <View style={estilos.modalBox}>
-            {/* Mensagem que será exibida de acordo com as validações */}
             <Text style={estilos.modalTexto}>{mensagemModal}</Text>
-            {/* Botão de fechar (se o login não foi concluído) */}
+
+            {loading && <ActivityIndicator size="large" color="#4CAF50" style={{ marginTop: 10 }} />} {/* <-- Loader */}
+
             {!loginConcluido && (
               <TouchableOpacity
                 style={estilos.modalBotao}
@@ -129,7 +119,6 @@ function TelaLogin({ navigation }) {      // para navegação entre telas
     </View>
   );
 }
-
 
 const estilos = StyleSheet.create({
   container: {
@@ -211,6 +200,5 @@ const estilos = StyleSheet.create({
   }
 });
 
-// Exporta o componente para ser usado em outras partes do app
 export default TelaLogin;
 
